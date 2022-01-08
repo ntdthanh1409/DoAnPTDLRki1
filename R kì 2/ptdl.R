@@ -124,10 +124,14 @@ data_1 <- data.frame(gernes, gernes_count)
 
 # Plot 1: Bieu do ve the loai va so luong truyen co the loai do
 ggplot(data_1, aes(x = gernes, y= gernes_count)) + 
-  geom_bar(stat = "identity") +
+  geom_bar(stat = "identity", fill="blue", alpha=.5, width=.5) +
   labs( title = 'BIEU DO VE THE LOAI VA SO LUONG TRUYEN CO THE LOAI DO',
         x = 'THE LOAI', y = 'SO LUONG') +
-  coord_flip()
+  coord_flip() +
+  theme_bw() + 
+  theme(plot.title = element_text(hjust = 0.5), 
+        panel.background = element_rect(fill = 'white'), 
+        panel.border = element_rect(colour = '#990000', size = 1.5))
 
 
 # plot 2, 3:
@@ -205,15 +209,20 @@ c <- round((c/sum)*100,2)
 d <- round((d/sum)*100,2)
 e <- round((e/sum)*100,2)
 
+Type <- c('low', 'medium', 'high', 'super_high'. 'mega_high')
 Percent_3 <- c(a,b,c,d,e)
 a <-c(1,2,3,4,5)
-data_2 <- data.frame(Type, a, Percent_2, Percent_3)
+data_2 <- data.frame(Type, a, Percent_2, Percent_3, Type)
 data_2
 ## plot 2:
 
-ggplot(data_2, aes(x= a)) + 
-  geom_line(aes(y = Percent_2), color = "red") + 
-  labs(title = 'BIEU DO VE TI LE SO TU', x = 'Type', y = 'Percent')
+ggplot(data_2, aes(x = "", y =  Percent_2, fill = Type)) +
+  geom_col(color = "black") +
+  geom_label(aes(label =  Percent_2),
+             color = "white",
+             position = position_stack(vjust = 0.5),
+             show.legend = FALSE) +
+  coord_polar(theta = "y") + labs(title = 'BIEU DO VE TI LE SO TU')
 
 ## Plot 3:
 
@@ -226,4 +235,8 @@ ggplot(data_2, aes(x= a)) +
 ggplot(data = data, mapping = aes(x = heart)) +
   geom_histogram(color = 'black',
                  fill = "red", binwidth = 300) +
-  labs(title = 'BIEU DO VE VE HEART', x = 'So luot theo doi')
+  labs(title = 'BIEU DO TAN SUAT VE SO LUOT THEO DOI', x = 'So luot theo doi') +
+  theme_bw() + 
+  theme(plot.title = element_text(hjust = 0.5), 
+        panel.background = element_rect(fill = 'white'), 
+        panel.border = element_rect(colour = 'Blue', size = 1.5))
