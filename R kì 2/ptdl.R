@@ -124,13 +124,14 @@ data_1 <- data.frame(gernes, gernes_count)
 
 # Plot 1: Bieu do ve the loai va so luong truyen co the loai do
 ggplot(data_1, aes(x = gernes, y= gernes_count)) + 
-  geom_bar(stat = "identity", fill="blue", alpha=.5, width=.5) +
+  geom_bar(stat = "identity", fill="blue", color = 'black', alpha=.5, width=.5) +
   labs( title = 'BIEU DO VE THE LOAI VA SO LUONG TRUYEN CO THE LOAI DO',
         x = 'THE LOAI', y = 'SO LUONG') +
   coord_flip() +
   theme_bw() + 
-  theme(plot.title = element_text(hjust = 0.5), 
-        panel.background = element_rect(fill = 'white'), 
+  theme(plot.title =  element_text(color = '#731313', size =15, face = 'bold'),
+        plot.subtitle =  element_text(color = '#254721', size =10, face = 'italic'),
+        plot.caption=  element_text(color = '#142751', size =5, face = 'italic'),
         panel.border = element_rect(colour = '#990000', size = 1.5))
 
 
@@ -182,37 +183,8 @@ e <- round((e/sum)*100,2)
 
 Percent_2 <- c(a,b,c,d,e)
 Type <- c('Low', 'Medium', 'High', 'Super_High', 'Mega_High')
-
-df_3 <- data$view
-a = 0
-b = 0
-c = 0
-d = 0
-e = 0
-for (i in df_3){
-  if (i <= 50000){
-    a = a +1
-  } else if (50000 <i & i <= 150000){
-    b = b + 1
-  } else if (i > 150000 & i <= 250000){
-    c = c + 1
-  } else if (i > 250000 & i <= 350000){
-    d = d + 1
-  } else{
-    e = e + 1
-  }
-}
-sum <- a + b + c + d + e
-a <- round((a/sum)*100,2)
-b <- round((b/sum)*100,2)
-c <- round((c/sum)*100,2)
-d <- round((d/sum)*100,2)
-e <- round((e/sum)*100,2)
-
-Type <- c('low', 'medium', 'high', 'super_high'. 'mega_high')
-Percent_3 <- c(a,b,c,d,e)
 a <-c(1,2,3,4,5)
-data_2 <- data.frame(Type, a, Percent_2, Percent_3, Type)
+data_2 <- data.frame(Type, a, Percent_2, Type)
 data_2
 ## plot 2:
 
@@ -226,9 +198,39 @@ ggplot(data_2, aes(x = "", y =  Percent_2, fill = Type)) +
 
 ## Plot 3:
 
-ggplot(data_2, aes(x= a)) + 
-  geom_line(aes(y = Percent_3), color = "red") + 
-  labs(title = 'BIEU DO VE TI LE SO LUOT XEM', x = 'Type', y = 'Percent')
+Type <- c('Low', 'Medium', 'High', 'Super_High', 'Mega_High')
+
+df_3 <- data$view
+a = 0
+b = 0
+c = 0
+d = 0
+e = 0
+for (i in df_3){
+  if (i <= 30000){
+    a = a +1
+  } else if (30000 <i & i <= 150000){
+    b = b + 1
+  } else if (i > 150000 & i <= 250000){
+    c = c + 1
+  } else if (i > 250000 & i <= 350000){
+    d = d + 1
+  } else{
+    e = e + 1
+  }
+}
+
+View_count <- c(a,b,c,d,e)
+data_3 <- data.frame(Type, View_count)
+data_3
+ggplot(data_3, aes(x = Type, y= View_count)) + 
+  geom_bar(stat = "identity", fill="yellow", color = 'black', alpha=.5, width=.5) +
+  labs( title = 'BIEU DO VE LOAI VIEW',
+        x = 'TYPE', y = 'SO LUONG') +
+  theme_bw() + 
+  theme(plot.title =  element_text(color = '#731313', size =15, face = 'bold'), 
+        panel.background = element_rect(fill = 'white'), 
+        panel.border = element_rect(colour = '#990000', size = 1.5))
 
 ## Plot 4;
 
